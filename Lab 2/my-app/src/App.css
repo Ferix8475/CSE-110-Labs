@@ -31,7 +31,10 @@
 
 }
 
+.notebutton:hover{
+  background-color: #a7a8a8; 
 
+}
 
  .note-form {
   display: "flex";

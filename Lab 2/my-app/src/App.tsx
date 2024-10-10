@@ -67,7 +67,14 @@ const deleteNoteHandler = (noteId: number) => {
           <input
             placeholder="Note Title"
             onChange={(event) =>
-              setCreateNote({ ...createNote, title: event.target.value })}
+            {
+              const title = event.target.value;
+
+              // Check if the title exceeds 50 characters
+              if (title.length > 50) {
+                alert('Title cannot exceed 50 characters!');
+              }
+              setCreateNote({ ...createNote, title: event.target.value })}}
             required>
           </input>
         
@@ -100,11 +107,11 @@ const deleteNoteHandler = (noteId: number) => {
       {notes.map((note) => (
   <div key={note.id} className="note-item">
     <div className="notes-header">
-      <button onClick={() => toggleFavorite(note.title)} className="heart-btn">
+      <button className={'notebutton'} onClick={() => toggleFavorite(note.title)} >
         {favorites.includes(note.title) ? '❤️' : '🤍'}
       </button>
-      <button onClick={() => setSelectedNote(note)}>Edit</button>
-      <button onClick={() => deleteNoteHandler(note.id)}>x</button>
+      <button className={'notebutton'} onClick={() => setSelectedNote(note)}>Edit</button>
+      <button className={'notebutton'} onClick={() => deleteNoteHandler(note.id)}>x</button>
     </div>
     
     {selectedNote.id === note.id ? (
@@ -143,8 +150,7 @@ const deleteNoteHandler = (noteId: number) => {
           <option value={Label.other}>Other</option>
         </select>
 
-        {/* Save Changes Button */}
-        <button
+        <button className={'notebutton'}
           onClick={() => {
             const updatedNotes = notes.map((n) => 
               n.id === selectedNote.id ? selectedNote : n
